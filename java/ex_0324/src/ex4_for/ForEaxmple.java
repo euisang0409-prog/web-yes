@@ -95,9 +95,7 @@ public class ForEaxmple {
 //        System.out.println("입력한 10개의 수 중 짝수의 개수: " + count);
 		
 		
-		
-		
-		
+		int[] numbers = {10, 20, 30, 40, 50};
 		
 		
 		
