@@ -1,0 +1,22 @@
+로또 만들기
+
+int[] lotto = new int[6];			// --> 배열이 [] [] [] [] [] [] 6개 생성
+		
+outer:for(int i = 0; i < lotto.length;) {     --> 라벨(label) == outer --> 보통 break는 한 개 반복문만 종료함
+
+근데 outer 쓰면
+바깥 반복문까지 한 번에 종료 가능
+			
+// 난수를 하나 뽑아 배열에 저장
+	lotto[i] = (int)(Math.random()*45)+1; // 난수
+			
+		//중복이 있는지 검사
+	for(int j = 0; j < i; j++) {
+		if(lotto[i] == lotto[j]) {
+			// 다시 뽑아야 한다.
+		continue outer;
+				}
+			}
+		System.out.print(lotto[i]+" ");
+		i++;
+	}

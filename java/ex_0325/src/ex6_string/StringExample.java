@@ -79,8 +79,8 @@ public class StringExample {
 //		String[] arr = board.split(",");
 //		System.out.println(Arrays.toString(arr));
 		
-		// 특정 문자열을 포함하고 있는지에 대한 여부(true,false)
-		// contauns("문자열");
+//		 특정 문자열을 포함하고 있는지에 대한 여부(true,false)
+//		 contauns("문자열");
 //		System.out.println(subject.contains("자바"));
 		
 		// 키보드에서 알파벳을 무작위로 입력받는다.
