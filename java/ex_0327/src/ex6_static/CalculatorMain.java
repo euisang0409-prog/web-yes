@@ -12,7 +12,12 @@ public class CalculatorMain {
 		System.out.println(Calculator.plus(3, 4));
 		System.out.println(Calculator.minus(24, 4));
 		
+		// 학생 정보를 저장하는 Student 클래를 만들어라
 		
+		
+		
+		
+	
 		
 		
 	}
