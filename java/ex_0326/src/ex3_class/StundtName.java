@@ -4,7 +4,7 @@ public class StundtName {
  public static void main(String[] args) {
 	 Stundt s = new Stundt();
 		
-		s.name = "유의상";
+		s.name = "유의상d";
 		s.age = 26;
 		s.score = 100;
 		
@@ -16,7 +16,7 @@ public class StundtName {
 		
 		System.out.println("--------------------------------------");
 		
-		s2.name = "홍길동";
+		s2.name = "홍길동d";
 		s2.age = 260;
 		s2.score = 1000;
 		
@@ -28,7 +28,7 @@ public class StundtName {
 		
 		System.out.println("--------------------------------------");
 		
-		s3.name = "고길동";
+		s3.name = "고길동d";
 		s3.age = 2600;
 		s3.score = 10000;
 		
