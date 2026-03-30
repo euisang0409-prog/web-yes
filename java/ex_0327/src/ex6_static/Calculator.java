@@ -2,6 +2,11 @@ package ex6_static;
 
 public class Calculator {
 
+	// static 키워드가 붙어있으면 메모리에 한번만 올라간다.
+	// 모든 객체가 static 필드이 값을 공유한다.
+	
+	
+	
 	// 파이 : 3.141592
 	static double pi = 3.141592;
 	
