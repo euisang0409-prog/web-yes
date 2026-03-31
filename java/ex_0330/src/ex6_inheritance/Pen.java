@@ -1,34 +1,45 @@
 package ex6_inheritance;
 
+import java.util.Set;
+
 public class Pen {
 	
 	protected int amount; // 남은 양
 	
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	
+	public int getAmount() {
+		return amount;
+	}
 	
 	
 	
 }
-class SharpPen extends Pen{
+public class SharpPen extends Pen{
+	
 	public int width; // 심 굵기
 	}
 
-class BallPen extends Pen{
+public class BallPen extends Pen{
 	public String color;
 	public BallPen(String color) {
 		this.color = color;
 	}
 }
 
-class FountainPen extends BallPen{
+public class FountainPen extends BallPen{
 	
-	 public FountainPen(String color) {
-	        super(color); // 부모 생성자 호출
+  public void refill(int n) {
+	setAmount(n);
+		    }
+	        
+	        
+	        
 	    }
 
-	    // 리필 메서드
-	    public void refill(int n) {
-	        this.amount = n;
-	    }
+	   
 	    
 }
 
