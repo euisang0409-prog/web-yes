@@ -1,8 +1,6 @@
 package ex_Notification;
 
-import ex3_interface.Notification;
-
-public class Main {
+ class Main {
 	public static void main(String[] args) {
 		
 		Notification[] notiy = {
