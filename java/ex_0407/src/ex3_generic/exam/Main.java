@@ -1,0 +1,12 @@
+package ex3_generic.exam;
+
+public class Main {
+	public static void main(String[] args) {
+		
+		String [] name = {"±èÃ¶¼ö","ÀÌ¿µÈñ","¹Ú¹Î¼ö"};
+		Integer[] nums = {10,20,30};
+		
+		ArrayPrinter.printArray(name);
+		ArrayPrinter.printArray(nums);
+	}
+}

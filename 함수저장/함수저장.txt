@@ -18,7 +18,7 @@
 
 👉 숫자로 변환 실패하면 잡음
 ========================================
-🔸 throw new Exception("숫자 형식 오류")
+🔸 throw  Exception("숫자 형식 오류")
 
 👉 새로운 예외 강제로 발생
 👉 메시지 바꿔서 Main으로 던짐
@@ -42,12 +42,11 @@ sqrt -> 제곱근
 Calendar.YEAR -> 년도
 (Calendar.MONTH)+1; -> 월
 (Calendar.DAY_OF_MONTH) -> 일
+========================================
+ getDeclaredConstructors() : 생성자 정보 읽기
+Constructor : 클래스의 생성자 정보를 담고 있는 클래스	
+c.getParameterTypes(); : 매개변수의 타입을 반환
+========================================
 
 
 
-
-
-
-
-
-1

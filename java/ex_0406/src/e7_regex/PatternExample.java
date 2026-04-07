@@ -75,5 +75,32 @@ public class PatternExample {
 		regExp = "[a-zA-Z0-9_]+@[a-zA-Z]+.[a-zA-Z]{2,}";
 	System.out.println(str.matches(regExp));	
 		
+	String[] arr = {"123","abc","4567","a1b2"};
+	
+	regExp = "[0-9]+";
+	
+	for(String s : arr) {
+		if(s.matches(regExp)) {
+			System.out.println(s);
+		}
+	}
+	
+	String[] arr2 = {"È«±æµ¿","Tom","±èÃ¶¼ö","a1","±èÀÌ¹ÚÁ¶±æµ¿"};
+	
+	regExp = "[°¡-ÆR]{2,5}";
+	
+	for(String s : arr2) {
+		if(s.matches(regExp)) {
+			System.out.println(s);
+		}
+	}
+	
+	// ÇÑ±Û¸¸, 2~5±ÛÀÚ
+	
+	
+	
+	
+	
+	
 	}
 }
