@@ -1,0 +1,15 @@
+중첩 제네릭
+- 제네릭 타입 안에 또 다른 제네릭 타입이 들어간 구조
+Box<Pair<String, lnteger>>
+
+복잡한 구조의 표현
+Board<article <Intger,Integer>>
+
+코드 가독성과 유지보수에 유리
+
+class Box<T>{
+	T item;
+}
+
+Box<List<String>> box = new BOx<>();
+

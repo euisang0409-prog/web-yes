@@ -8,5 +8,7 @@ public class Main {
 		
 		ArrayPrinter.printArray(name);
 		ArrayPrinter.printArray(nums);
+		
+		
 	}
 }

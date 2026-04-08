@@ -14,9 +14,6 @@ public class ArrayPrinter {
 	}
 	
 	
-
-	
-
 	// main에서 다음의 배열들을 출력하기
 	// String [] name = {"김철수","이영희","박민수"};
 	// Integer[] nums = {10,20,30};
