@@ -1,0 +1,45 @@
+1. 오류 식별
+🔹 [A] 오류
+for (int i = 0; i <= scores.length; i++)
+✔ 오류 종류
+
+배열 인덱스 초과 오류 (ArrayIndexOutOfBoundsException)
+
+✔ 원인
+
+배열의 인덱스는 0부터 length - 1까지인데
+조건식에서 <=를 사용하여 scores[length]에 접근하게 되어 오류가 발생한다.
+
+===========================================
+
+B] 오류
+int average = sum / scores.length;
+✔ 오류 종류
+
+논리적 오류 (정수 나눗셈으로 인한 값 손실)
+
+✔ 원인
+
+정수형(int)끼리 나누면 결과도 정수형이 되어 소수점이 제거된다.
+평균을 실수형으로 계산해야 하므로 double 타입을 사용해야 한다.
+
+public class AverageTest {
+    public static void main(String[] args) {
+        int[] scores = {80, 90, 75, 100};
+        int sum = 0;
+
+        // 수정된 반복문
+        for (int i = 0; i < scores.length; i++) {
+            sum += scores[i];
+        }
+
+        // 수정된 평균 계산
+        double average = (double) sum / scores.length;
+
+        System.out.println("평균 점수: " + average);
+    }
+}
+
+
+
+

@@ -1,0 +1,35 @@
+1-1. [A] 오류 2가지
+🔹 오류 ① 문자열 비교 방식 오류
+grade == "VIP"
+✔ 원인
+
+== 연산자는 문자열의 값이 아니라 주소(참조값)를 비교한다.
+따라서 문자열의 내용 비교를 위해서는 equals() 메서드를 사용해야 한다.
+
+🔹 오류 ② 자료형(타입) 불일치 문제
+discountedPrice = price * 0.8;
+✔ 원인
+
+price * 0.8의 결과는 double 타입인데
+이를 int 변수인 discountedPrice에 저장하려고 하여 타입 불일치가 발생한다.
+
+따라서 (int) 형변환이 필요하다.
+
+✅ 1-2. 수정된 전체 코드
+public class DiscountCalculator {
+    public static void main(String[] args) {
+        int price = 10000;
+        String grade = "VIP";
+        int discountedPrice = 0;
+
+        if (grade.equals("VIP")) {
+            discountedPrice = (int)(price * 0.8);
+        } else if (grade.equals("GOLD")) {
+            discountedPrice = (int)(price * 0.9);
+        } else {
+            discountedPrice = price;
+        }
+
+        System.out.println("할인된 금액: " + discountedPrice);
+    }
+}

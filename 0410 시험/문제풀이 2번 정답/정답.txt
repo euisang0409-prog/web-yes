@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class StudentScoreManager {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // 입력
+        System.out.print("이름 입력: ");
+        String name = sc.nextLine();
+
+        System.out.print("Java 점수: ");
+        int java = sc.nextInt();
+
+        System.out.print("DB 점수: ");
+        int db = sc.nextInt();
+
+        System.out.print("HTML 점수: ");
+        int html = sc.nextInt();
+
+        // 처리
+        int sum = java + db + html;
+        double average = (double) sum / 3;
+
+        String result;
+        if (average >= 60) {
+            result = "합격";
+        } else {
+            result = "불합격";
+        }
+
+        // 출력
+        System.out.println("이름: " + name);
+        System.out.println("총점: " + sum);
+        System.out.println("평균: " + average);
+        System.out.println("결과: " + result);
+
+        sc.close();
+    }
+}
