@@ -17,7 +17,7 @@ public class Product {
 		return name;
 	}
   
-	public int getTotalPrice() {
+	public int getPrice() {
 		return price * quantity;
 	}
 		

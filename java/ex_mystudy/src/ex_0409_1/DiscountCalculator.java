@@ -13,15 +13,17 @@ public class DiscountCalculator {
 	       // 디스카운터 프라이스 프라이스 곱하게 0.8의 결과는 더블인데
 	       // 이를 int 변수인 디스카운트프라이스에 저장하려고 하여 
 	       // 타입 불일치가 발생한다. 따라사 형변환 (int)형변환이 필요하다.
+	       // [A] 오류발생로직
 	       if (grade.equals("VIP")) { 
 	           discountedPrice = (int)(price * 0.8); 
-	       } else if(grade.equals("VIP")) {
-	    	   discountedPrice = (int)(price * 0.9);
 	       }else {
-	    	   discountedPrice = price;
-	       }
-	       System.out.println("할인된 금액: " + discountedPrice);
-	       // [B] 나머지 로직
+	    	discountedPrice = price;   
+	       } 
+	      System.out.println(discountedPrice);
+	      
+
+	
+
 
 	   }
 

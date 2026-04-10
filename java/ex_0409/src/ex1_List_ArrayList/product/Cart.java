@@ -26,10 +26,45 @@ public class Cart {
 		
 	}
 	 
+	public void printCart() {
+		// 장바구니가 비어있으면 "장바구니가 비어있습니다." 출력하고 종료
+		if(products.size() == 0) {
+			System.out.println("장바구니가 비워있습니다.");
+			return; // 메서드를 끝내는 용도로 사용
+		}
+			
+		// 모든 상품을 출력하기
+		for(Product p : products) {
+			System.out.println(p);
+		}
+		
+	}
 	
+	public void printTotalPrice() {
+		int total = 0;
+		
+		for(Product p : products) {
+			total += p.getPrice();
+		}
+		
+		System.out.println("총 결제금액: " + total + "원");
+		
+	}
 	
-	
-	
+	public void removeProduct(String name) {
+		// 제품이 있으면 삭제하고 " 상품 삭제 완료"
+		for(int i = 0; i < products.size(); i++) {
+			if(products.get(i).getName().equals(name)) {
+				products.remove(i);
+				System.out.println("상품 삭제 완료");
+				return;
+			}
+		}
+		
+		
+		//제품이 없으면 " 해당 제품이 없습니다."
+		System.out.println("해당 상품이 없습니다.");
+	}
 	
 	
 	
