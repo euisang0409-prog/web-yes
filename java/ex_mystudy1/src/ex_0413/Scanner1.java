@@ -1,0 +1,28 @@
+package ex_0413;
+
+import java.util.Scanner;
+
+public class Scanner1 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("薑熱 殮溘:");
+		int num = sc.nextInt();
+		
+		if(num > 0) {
+			System.out.println("曄熱");
+		}else if(num == 0) {
+			System.out.println("0");
+		}else {
+			System.out.println("擠熱");
+		}
+		
+		if (num % 2 == 0) {
+			System.out.println("礎熱");
+		}else {
+			System.out.println("�汝�");
+		}
+		
+		
+	}
+}
