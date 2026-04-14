@@ -1,0 +1,49 @@
+StringProcessor 함수형 인터페이스 작성하기
+추상메서드
+String process(String text);
+
+TextService 클래스
+processText(String text, StringProcessor processor) 메서드 작성하기
+- 이 메서드는 전달받은 문자열을 람다식으로 처리한 결과를 반환한다.
+
+Main에서 다음의 작업 수행하기
+String text = "This product is currently out of stock."
+- 모든 문자를 대문자로 변환
+- "out of stock" -> "in stock"으로 변환
+==============================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
