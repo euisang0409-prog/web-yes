@@ -18,8 +18,10 @@ public class CalculatorService {
 			return (a, b) -> a + b;
 		}else if(type.equals("sub")) {
 			return (a, b) -> a - b;
+		}else {
+			return null;
 		}
-		return ;
+		
 		
 		
 		
