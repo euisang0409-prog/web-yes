@@ -143,6 +143,8 @@ public class FileExample {
 			System.out.println(file.getName());
 		}
 		
+		// File로는 파일 안에 쓰여진 내용을 읽고 쓸 수는 없다는 점
+		// 파일 그 자체가 아니라 파일의 위치정보와 상태정보를 담당한다.
 		
 		
 		
