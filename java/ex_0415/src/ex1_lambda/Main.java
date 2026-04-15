@@ -16,12 +16,14 @@ class Printer{
 class Person{
 	
 	String name;
+	int age;
 	public Person() {
 		System.out.println("Person 객체 생성");
 	}
 	
-	public Person(String name) {
+	public Person(String name, int age) {
 		this.name = name;
+		this.age = age;
 	}
 	
 }
@@ -75,10 +77,10 @@ public class Main {
 		// 4. 생성자의 참조
 		// 클래스명::new
 		Supplier<Person> s1 = Person:: new;
-		Function<String, Person> f3 = Person::new; 
+		BiFunction<String, Integer, Person> f3 = Person::new;
 		
 		Person p1 = s1.get();
-		Person p2 = f3.apply("홍길동");
+		Person p2 = f3.apply("홍길동",30);
 		
 		
 	}

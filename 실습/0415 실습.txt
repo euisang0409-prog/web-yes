@@ -1,0 +1,9 @@
+Printer클래스
+메서드
+print(String message)
+- "출력내용: XXX라고 출력하기
+Main 클래스
+static executePrint(Consumer<String> action, String message)
+- 전달받은 action을 사용하여 mesage출력하기
+
+Printer객체를 생성한 뒤, 메서드 참조를 이용하여 "람다식 전달 연습" 라고 출력하기
