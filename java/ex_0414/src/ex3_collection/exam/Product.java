@@ -8,10 +8,10 @@ public class Product {
 	private int stock;
 	
 	public Product(String code, String name, int price, int stock) {
-		this.code = code;
-		this.name = name;
-		this.price = price;
-		this.stock = stock;
+		this.code = code;	//제품코드
+		this.name = name;	//제품명
+		this.price = price;	// 가격
+		this.stock = stock;	// 재고
 	}
 
 	public String getCode() {
