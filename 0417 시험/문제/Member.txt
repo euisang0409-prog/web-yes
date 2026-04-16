@@ -1,0 +1,67 @@
+[Member 문제]
+
+1. Member 클래스를 작성하시오.
+   Member 클래스는 다음 필드를 가진다.
+
+* id : 문자열
+* name : 문자열
+* age : 정수
+
+2. 모든 필드를 초기화하는 생성자를 작성하시오.
+
+3. 회원 정보를 출력하는 printInfo() 메서드를 작성하시오.
+   출력 형식: 아이디: hong, 이름: 홍길동, 나이: 20
+
+4. Main 클래스에서 ArrayList<Member>를 생성하고 회원 3명을 저장하시오.
+
+* 향상된 for문을 사용하여 전체 회원 정보를 출력하시오.
+* 나이가 20세 이상인 회원 수를 출력하시오.
+=====================================================
+정답: 
+[Member 정답]
+
+import java.util.ArrayList;
+
+class Member {
+String id;
+String name;
+int age;
+
+```
+public Member(String id, String name, int age) {
+    this.id = id;
+    this.name = name;
+    this.age = age;
+}
+
+public void printInfo() {
+    System.out.println("아이디: " + id + ", 이름: " + name + ", 나이: " + age);
+}
+```
+
+}
+
+public class Main {
+public static void main(String[] args) {
+
+```
+    ArrayList<Member> list = new ArrayList<>();
+
+    list.add(new Member("hong", "홍길동", 20));
+    list.add(new Member("kim", "김철수", 25));
+    list.add(new Member("lee", "이영희", 18));
+
+    int count = 0;
+
+    for (Member m : list) {
+        m.printInfo();
+        if (m.age >= 20) {
+            count++;
+        }
+    }
+
+    System.out.println("20세 이상 회원 수: " + count);
+}
+```
+
+}

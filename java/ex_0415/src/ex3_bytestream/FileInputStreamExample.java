@@ -19,7 +19,7 @@ public class FileInputStreamExample {
         byte[] read = new byte[100];
 
         // 파일에서 바이트 단위로 데이터를 읽어오는 클래스
-        // 파일이 없으면 예외가 발생할 수 있기 때문에 예외처리를 해줘야 한다.
+        // 파일이 없으면 예외가 발생할 수 있기 때문에 예외처리를 해 줘야 한다.
         try {
             FileInputStream fis = new FileInputStream("test.txt");
 
