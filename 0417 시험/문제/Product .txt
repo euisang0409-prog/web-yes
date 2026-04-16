@@ -24,46 +24,50 @@
 * 10개 판매 시도
 * 재고 출력
 =====================================================
-[Product 정답]
+public class Product {
+    private String name;
+    private int stock;
 
-class Product {
-String name;
-int stock;
+    // 생성자
+    public Product(String name, int stock) {
+        this.name = name;
+        this.stock = stock;
+    }
 
-```
-public Product(String name, int stock) {
-    this.name = name;
-    this.stock = stock;
-}
+    // 판매 메서드
+    public void sell(int amount) {
+        if (amount > stock) {
+            System.out.println("재고가 부족합니다.");
+        } else {
+            stock -= amount;
+            System.out.println("판매 완료");
+        }
+    }
 
-public void sell(int amount) {
-    if (amount > stock) {
-        System.out.println("재고가 부족합니다.");
-    } else {
-        stock -= amount;
-        System.out.println("판매 완료");
+    // 상품 정보 출력
+    public void printInfo() {
+        System.out.println("상품명: " + name + ", 재고: " + stock);
     }
 }
-
-public void printInfo() {
-    System.out.println("상품명: " + name + ", 재고: " + stock);
-}
-```
-
-}
-
+===================================================================
 public class Main {
-public static void main(String[] args) {
+    public static void main(String[] args) {
 
-```
-    Product p = new Product("노트북", 10);
+        Product p = new Product("노트북", 5);
 
-    p.printInfo();
-    p.sell(3);
-    p.printInfo();
-    p.sell(10);
-    p.printInfo();
-}
-```
+        // 재고 출력
+        p.printInfo();
 
+        // 3개 판매
+        p.sell(3);
+
+        // 재고 출력
+        p.printInfo();
+
+        // 10개 판매 시도
+        p.sell(10);
+
+        // 재고 출력
+        p.printInfo();
+    }
 }
