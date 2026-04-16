@@ -31,56 +31,56 @@
 * 반드시 람다식을 사용해야 한다.
 * stream()은 사용하지 않는다.
 =========================================
-정답: 
-[Employee 정답]
+public class Employee {
 
+    private String name;
+    private int salary;
+
+    public Employee(String name, int salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void printInfo() {
+        System.out.println("이름: " + name + ", 급여: " + salary);
+    }
+}
+===========================================
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Employee {
-String name;
-int salary;
-
-```
-public Employee(String name, int salary) {
-    this.name = name;
-    this.salary = salary;
-}
-
-public void printInfo() {
-    System.out.println("이름: " + name + ", 급여: " + salary);
-}
-```
-
-}
-
 public class Main {
-public static void main(String[] args) {
+    public static void main(String[] args) {
 
-```
-    ArrayList<Employee> list = new ArrayList<>();
+        ArrayList<Employee> list = new ArrayList<>();
 
-    list.add(new Employee("김철수", 3500));
-    list.add(new Employee("이영희", 4000));
-    list.add(new Employee("박민수", 3000));
-    list.add(new Employee("최지훈", 2000));
+        list.add(new Employee("김철수", 3500));
+        list.add(new Employee("이영희", 4200));
+        list.add(new Employee("박민수", 2800));
+        list.add(new Employee("홍길동", 5000));
 
-    // 급여 높은 순
-    Collections.sort(list, (a, b) -> b.salary - a.salary);
+        // 1) 급여 높은 순 정렬 (내림차순)
+        Collections.sort(list, (a, b) -> b.getSalary() - a.getSalary());
 
-    for (Employee e : list) {
-        e.printInfo();
+        System.out.println("=== 급여 높은 순 ===");
+        for (Employee e : list) {
+            e.printInfo();
+        }
+
+        // 2) 이름 오름차순 정렬
+        Collections.sort(list, (a, b) -> a.getName().compareTo(b.getName()));
+
+        System.out.println("=== 이름 오름차순 ===");
+        for (Employee e : list) {
+            e.printInfo();
+        }
     }
-
-    System.out.println("-----");
-
-    // 이름 오름차순
-    Collections.sort(list, (a, b) -> a.name.compareTo(b.name));
-
-    for (Employee e : list) {
-        e.printInfo();
-    }
-}
-```
-
 }
