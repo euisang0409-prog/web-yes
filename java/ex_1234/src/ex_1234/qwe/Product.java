@@ -1,7 +1,7 @@
-package ex_0416;
+package ex_1234.qwe;
 
 public class Product {
-	
+
 	private String name;
 	private int stock;
 	
@@ -13,26 +13,14 @@ public class Product {
 	public void sell(int amount) {
 		if(amount > stock) {
 			System.out.println("재고가 부족합니다.");
-		}else {
+		}else
 			stock -= amount;
-			System.out.println("판매 완료");
-		}			
+		System.out.println("판매 완료");
 	}
-	public void printInfo() {
-		System.out.println("상품명:" + name);
+	
+	public void prinInfo() {
+		System.out.println("상품명: " + name);
 		System.out.println("재고: " + stock);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 }

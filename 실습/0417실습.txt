@@ -1,0 +1,20 @@
+ Member클래스
+- id(int)
+- name(String)
+- status(String)
+
+새성자를 통해 서 초기화 하기
+
+getter메서드 만들기
+
+toString()오버라이딩 하기
+"Member{id=XX, name=XX, status=XX}"라고 출력
+
+Main에서 다음의 회원데이터 저장하기
+1 홍길동 ACTIVE
+2 김철수 INACTIVE
+3 이영희 ACTIVE
+4 박민수 INACTIVE
+5 최지은 ACTIVE
+
+상태가 ACTIVE인 회원만 출력하기

@@ -1,7 +1,7 @@
-package ex_0416.member;
+package ex_1234.qwe;
 
 public class Member {
-
+	
 	private String id;
 	private String name;
 	private int age;
@@ -17,9 +17,7 @@ public class Member {
 	}
 	
 	public void printInfo() {
-		System.out.println("아이디: " + id + ", 이름:" + name + ", 나이:" + age);
+		System.out.println("아이디: " + id + ", 이름: "+ ", 나이: " + age);
 	}
-	
-	
 	
 }
