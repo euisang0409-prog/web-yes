@@ -12,6 +12,7 @@ public class Example {
 		numbers.stream()
 		.filter(x -> x % 2 == 0)
 		.map(x -> x + 10)
+		
 		.forEach(System.out::print);
 		System.out.println();
 		
