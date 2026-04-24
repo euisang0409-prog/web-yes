@@ -1,0 +1,17 @@
+# STUDENT 테이블 만들기
+# 속성
+# ID : 정수, 기본키
+# NAME : 문자열(50), NOT NULL
+# AGE : 정수
+# EMAIL : 문자열(100)
+
+# 다음의 컬럼을 테이블에 추가하세요
+# PHONE : 문자열(20)
+
+# AGE컬럼의 타입을 정수 -> TINYINT로 수정하세요
+
+# NAME컬럼의 이름을 STUDENT_NAME으로 변경하세요
+
+# PHONE 컬럼을 삭제하세요
+
+# EMAIL 컬럼을 NOT NULL로 변경하세요
