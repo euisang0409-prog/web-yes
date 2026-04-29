@@ -138,10 +138,118 @@ WHERE pot_name = '진달래';
 
 update tbl_student
 set name = '김길동'
-where name = '홍길동';
+where name = '홍길동'; -- 조건을 걸지 않으면 테이블내의 모든 속성이 수정될 수 있다.
 
 select * from tbl_student;
 
+-- default 값으로 바꾸기
+update tbl_student 
+set gender = default
+where ID = 3;
 
+-- 여러 조건으로 UPDATE하기
+-- AND를 사용하여 조건을 모두 만족하는 행만 수정하기
+-- 꽃 테이블에서 색깔이 보라색이고 가격이 5000원 이상인 꽃의 이름을 
+-- 진달래로 바꾸세요
+update flower
+set flower_name = '진달래'
+where flower_color = '보라색' and flower_price >= 5000;
 
+select * from flower
 
+create table film_practice as
+select * from sakila.film;
+
+select * from actor_practice;
+
+-- 배우 번호가 1번인 배우의 이름을 'JAMES'로 수정하세요
+
+update actor_practice
+set first_name = 'JAMES'
+where actor_id = 1;
+
+select * from actor_practice;
+
+-- 배우 번호가 2번인 배우의 이름을 'MINA', 성을 'LEE'로 수정
+
+update actor_practice
+set first_name = 'MINA',LAST_NAME = 'LEE'
+where actor_id = 2;
+
+select * from film_practice;
+
+-- 영화 번호가 1번인 영화의 대여 가격(rental_rate)을 4.99로 수정
+
+update film_practice
+set rental_rate = 4.99
+where film_id = 1;
+
+-- 배우 테이블에서 이름이 A로 시작하는 배우의 성을 'TEST'로 바꾸세요
+
+update actor_practice
+set LAST_name = 'TEST'
+where first_name like 'A%';
+
+select * from actor_practice;
+-- 영화 테이블에서 등급이 'R', 또는 'NC-17'인 영화의 대여기간(rental_dura)
+-- 3으로 수정하세요
+update film_practice
+set rental_duration = 3	-- 수정하고자 하는 속성
+where rating in ('R','NC-17'); -- 조건
+select * from actor_practice;
+
+-- 영화 번호가 1인 영화에 대해 대여기간을 1증가 시키기
+select TitLE, RENTAL_DURATION from FILM_PRACTICE
+where FILM_ID = 1;
+
+update film_practice
+set RentaL_DURATION = RENTAL_DURATION + 1
+where film_ID = 1;
+
+select * from film_practice;
+-- 영화 테이블의 대여료(rental_rate)를 10% 인상하세요
+update film_practice
+set rental_rate = rental_rate * 1.1;
+
+select title, rental_rate from film_practice;
+
+-- 배우테이블에서 id가 1인 배우 삭제하기
+delete from actor_practice
+where actor_id = 1;
+
+select * from actor_practice;
+
+-- 여러 행을 삭제
+-- 이름이 JHON인 배우 모두 삭제하기
+delete from actor_practice
+where first_name = 'JHON';
+
+select * from actor_practice;
+
+-- LIKE를 이용한 삭제
+-- 이름이 A로 시작하는 배우 삭제하기
+
+delete from actor_practice
+where first_name like 'A%';
+
+-- 데이터만 전부 삭제하기
+delete from actor_practice;
+
+select * from actor_practice;
+
+-- FLOWER테이블의 장미 삭제하기
+-- 외래키 컬럼이 데이터를 참조하고 있으면 참조당하는 쪽의 데이터를
+-- 먼저 삭제할 수 없다.
+-- 외래키를 설정할 때 on delete CASCADE 설정을 주게 되면
+-- 같이 삭제 된다.
+delete from pot
+where pot_name = '장미꽃';
+
+select * from POT;
+
+-- POT 테이블에서 장미꽃을 담고있는 화분 데이터 삭제
+
+-- SHOW TABLES;
+-- DROP TABLE actor_practice;
+-- CREATE TABLE actor_practice AS
+-- SELECT * FROM sakila.actor;
