@@ -304,7 +304,10 @@ where (DEPARTMENT, SALARY) in(
 );
 
 -- 각 부서에서 가장 낮은 급여를 받는 직원의 이름, 부서, 급여 조회하기
-
+select emp_name, departmentm,salary
+from employee e 
+where(department,salary) in(select department, salary)in
+)
 -- 부서별 최고 급여와 동일한 급여를 받는 직원의 이름, 부서, 급여 조회하기
 
 -- 부서별 평균 급여 이상을 받는 직원의 이름, 부서, 급여 조회하기
@@ -316,5 +319,27 @@ where salary >= (
     from employee
     where department = e.department
 );
+
+
+select *from employee;
+-- 김철수와 같은 부서, 같은 급여를 받는 직원 조회하기
+select *
+from employee
+where (department,salary) = (select department,salary
+						from employee where emp_name = '김철수');
+
+select *
+from employee 
+where department in(
+	select department
+	from employee
+) and salary in 
+	(select max(salary) 
+	from employee 
+	group by department);
+
+
+
+
 
 -- 각 부서에서 최고 급여를 받는 직원이 몇명인지 조회하기
