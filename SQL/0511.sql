@@ -646,7 +646,7 @@ delete from loop_result;
 
 -- repeat문을 사용하여 1부터 10까지의 총 합 구하기
 DELIMITER //
-create procedure sum_repeat()
+create procedure sum_repeat()     
 begin
 	declare v_num int default 1;
 	declare v_sum int default 0;

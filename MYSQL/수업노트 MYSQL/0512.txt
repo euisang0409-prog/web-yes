@@ -82,41 +82,36 @@ SQLWARNING : SQL 경고
 NOT FOUND : 조회 결과 없음
 MySQl 에러코드 : 1062 (중복 키 에러) 
 
+-- Trigger 
+-- insert, update, delete가 발생했을 때 실행되는 sql 프로그램
+-- 주문이 들어오면 재동 자동 차감
+-- 회원 정보가 수정되면 수정 로그를 저장 
+-- 급여가 음수가 입력되면 막기
+-- 게시글이 삭제되면 기록 남기기
 
+-- 프로시저는 직접 호출해야 실행 된다.
+-- 트리거는 자동으로 실행된다.
 
+-- 트리거 작동 시점
+-- BEFORE : 데이터가 저장, 수정,삭제 되기 전에 실행(검사)
+-- AFTER : 데이터가 저장,수정,삭제 된 후 실행(기록, 다른테이블을 수정)
 
+-- 실행 이벤트
+-- INSERT : 데이터 추가시 실행
+-- UPDATE : 데이터 수정시 실행
+-- DELETE : 데이터 삭제시 실행
 
+-- NEW : 새로 들어오거나 수정될 값
+-- OLD : 기존에 있던 값
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- 기본 문법
+-- DELIMITER // 
+-- CREATE TRIGGER 트리거명
+-- [BEFORE 또는 AFTER] [INSERT 또는 UPDATE 또는 DELETE]
+-- ON 테이블명
+-- FOR EACH ROW
+-- BEGIN
+-- 실행할 SQL;
+-- END //
+-- DELIMITER ;
 
