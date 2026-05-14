@@ -3,6 +3,7 @@ package common;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+// db ¿¬°á
 public class DBUtil {
 
     private static String url =
