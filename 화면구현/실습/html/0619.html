@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Flexbox Layout 연습</title>
+    <style>
+      /* 기본 레이아웃 초기화 */
+      body {
+        margin: 0;
+        font-family: sans-serif;
+      }
+
+      /* 헤더 스타일 */
+      header {
+        background-color: #2ecc71;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      /* 네비게이션 스타일 */
+      nav {
+        background-color: #27ae60;
+        padding: 10px;
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+      }
+
+      /* 메인 컨테이너 (Flexbox 적용) */
+      main {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        min-height: 300px;
+      }
+
+      /* 본문과 사이드바 */
+      section {
+        flex: 7; /* 70% 비율 */
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        padding: 20px;
+        text-align: center;
+      }
+      aside {
+        flex: 3; /* 30% 비율 */
+        background-color: #e9ecef;
+        border: 1px solid #ddd;
+        padding: 20px;
+        text-align: center;
+      }
+
+      /* 푸터 스타일 */
+      footer {
+        background-color: #34495e;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Flexbox Layout 연습</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="#">홈</a></li>
+        <li><a href="#">공지사항</a></li>
+        <li><a href="#">문의</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section>
+        <h2>메인 콘텐츠</h2>
+        <p>
+          이 영역은 본문 내용을 표시하는 구역이다.<br />Flexbox를 이용해 왼쪽에
+          배치된다.
+        </p>
+      </section>
+
+      <aside>
+        <h2>사이드바</h2>
+        <p>보조 정보나 공지사항을 표시하는 구역이다.</p>
+      </aside>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Flex Layout Practice</p>
+    </footer>
+  </body>
+</html>
