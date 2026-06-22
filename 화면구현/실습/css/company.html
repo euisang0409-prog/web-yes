@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회사 소개</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: 180px 1fr 220px;
+        grid-template-areas:
+          "header header header"
+          "nav main aside"
+          "footer footer footer";
+        min-height: 100vh;
+      }
+
+      header {
+        grid-area: header;
+        background: lightblue;
+        padding: 20px;
+      }
+
+      nav {
+        grid-area: nav;
+        background: lightgray;
+        padding: 20px;
+      }
+
+      main {
+        grid-area: main;
+        background: white;
+        padding: 20px;
+      }
+
+      aside {
+        grid-area: aside;
+        background: beige;
+        padding: 20px;
+      }
+
+      footer {
+        grid-area: footer;
+        background: lightblue;
+        padding: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1>회사 소개</h1>
+      </header>
+
+      <nav>
+        <h3>메뉴</h3>
+        <ul>
+          <p>회사소개</p>
+          <p>서비스</p>
+          <p>채용정보</p>
+          <p>문의하기</p>
+        </ul>
+      </nav>
+
+      <main>
+        <h2>본문 영역</h2>
+        <p>회사 소개 내용이 들어갑니다.</p>
+      </main>
+
+      <aside>
+        <h3>고객센터</h3>
+        <p>☎ 1588-1234</p>
+      </aside>
+
+      <footer>
+        <p>Copyright © Company</p>
+      </footer>
+    </div>
+  </body>
+</html>
