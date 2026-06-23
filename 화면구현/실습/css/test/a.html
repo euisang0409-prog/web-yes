@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CloudOps</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        color: #475569;
+      }
+
+      /* =========================
+   GNB
+========================= */
+
+      .gnb {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        border-bottom: 1px solid #ddd;
+        background: #fff;
+      }
+
+      .gnb__logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0f172a;
+      }
+
+      .gnb__menu {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+
+      .gnb__link {
+        text-decoration: none;
+        color: #475569;
+      }
+
+      .gnb__link--active {
+        color: #3498db;
+        font-weight: bold;
+      }
+
+      .gnb__start-btn {
+        text-decoration: none;
+        color: #3498db;
+        border: 1px solid #3498db;
+        padding: 10px 20px;
+        border-radius: 6px;
+      }
+
+      /* =========================
+   HERO
+========================= */
+
+      .hero {
+        background: #f8fafc;
+        text-align: center;
+        padding: 100px 20px;
+      }
+
+      .hero__title {
+        font-size: 48px;
+        color: #0f172a;
+        margin-bottom: 20px;
+      }
+
+      .hero__desc {
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      .hero__actions {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .hero__btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .hero__btn--primary {
+        background: #3498db;
+        color: white;
+      }
+
+      .hero__btn--secondary {
+        background: #e2e8f0;
+        color: #0f172a;
+      }
+
+      /* =========================
+   FEATURES
+========================= */
+
+      .features {
+        padding: 80px 50px;
+        background: #ffffff;
+      }
+
+      .features__title {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #0f172a;
+      }
+
+      .features__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .features__item {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 25px;
+      }
+
+      .features__icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+      }
+
+      .features__heading {
+        margin-bottom: 10px;
+        color: #0f172a;
+      }
+
+      .features__desc {
+        line-height: 1.6;
+      }
+
+      /* =========================
+   PRICING
+========================= */
+
+      .pricing {
+        padding: 80px 50px;
+        background: #f8fafc;
+      }
+
+      .pricing__title {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #0f172a;
+      }
+
+      .pricing__list {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+      }
+
+      .pricing__card {
+        width: 300px;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 30px;
+      }
+
+      .pricing__card--popular {
+        border: 2px solid #3498db;
+        transform: scale(1.05);
+      }
+
+      .pricing__name {
+        margin-bottom: 20px;
+        color: #0f172a;
+      }
+
+      .pricing__price {
+        font-size: 36px;
+        font-weight: bold;
+        color: #0f172a;
+        margin-bottom: 20px;
+      }
+
+      .pricing__benefits {
+        list-style: none;
+        line-height: 2;
+        margin-bottom: 20px;
+      }
+
+      .pricing__action-btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background: #e2e8f0;
+      }
+
+      .pricing__action-btn--highlight {
+        background: #3498db;
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="gnb">
+      <div class="gnb__logo">CloudOps</div>
+
+      <ul class="gnb__menu">
+        <li><a href="#" class="gnb__link gnb__link--active">제품 기능</a></li>
+        <li><a href="#" class="gnb__link">사용법</a></li>
+        <li><a href="#" class="gnb__link">가격정책</a></li>
+        <li><a href="#" class="gnb__link">고객센터</a></li>
+      </ul>
+
+      <a href="#" class="gnb__start-btn"> 무료 시작하기 </a>
+    </nav>
+
+    <header class="hero">
+      <h1 class="hero__title">
+        클라우드 인프라 관리를<br />
+        더 안전하고 완벽하게
+      </h1>
+
+      <p class="hero__desc">
+        복잡한 설정 없이 몇 번의 클릭만으로 모니터링, 보안, 배포를 자동화하세요.
+      </p>
+
+      <div class="hero__actions">
+        <button class="hero__btn hero__btn--primary">도입 문의하기</button>
+
+        <button class="hero__btn hero__btn--secondary">데모 보기</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="features">
+        <h2 class="features__title">비즈니스를 가속화하는 핵심 기능</h2>
+
+        <div class="features__list">
+          <article class="features__item">
+            <div class="features__icon">⚡</div>
+            <h3 class="features__heading">초고속 실시간 모니터링</h3>
+            <p class="features__desc">
+              서버와 서비스 상태를 실시간으로 확인합니다.
+            </p>
+          </article>
+
+          <article class="features__item">
+            <div class="features__icon">🛡️</div>
+            <h3 class="features__heading">엔터프라이즈급 보안</h3>
+            <p class="features__desc">
+              강력한 보안 정책으로 데이터를 보호합니다.
+            </p>
+          </article>
+
+          <article class="features__item">
+            <div class="features__icon">📊</div>
+            <h3 class="features__heading">인텔리전트 통계 리포트</h3>
+            <p class="features__desc">
+              데이터를 분석하여 인사이트를 제공합니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="pricing">
+        <h2 class="pricing__title">합리적인 선택, 투명한 요금제</h2>
+
+        <div class="pricing__list">
+          <article class="pricing__card">
+            <h3 class="pricing__name">스타터 플랜</h3>
+
+            <p class="pricing__price">₩29,000</p>
+
+            <ul class="pricing__benefits">
+              <li>✔ 최대 5명 사용자</li>
+              <li>✔ 실시간 모니터링</li>
+              <li>✔ 이메일 지원</li>
+            </ul>
+
+            <button class="pricing__action-btn">시작하기</button>
+          </article>
+
+          <article class="pricing__card pricing__card--popular">
+            <h3 class="pricing__name">프로페셔널 플랜</h3>
+
+            <p class="pricing__price">₩79,000</p>
+
+            <ul class="pricing__benefits">
+              <li>✔ 사용자 무제한</li>
+              <li>✔ 고급 보안 기능</li>
+              <li>✔ 24시간 기술 지원</li>
+            </ul>
+
+            <button class="pricing__action-btn pricing__action-btn--highlight">
+              추천 플랜 선택
+            </button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .card {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 12px;
+        padding: 20px;
+      }
+
+      .user-list .card:first-child {
+        border: 2px solid #3498db;
+      }
+
+      .user-list .card:nth-child(2) {
+        background-color: #fffcf0;
+      }
+
+      .role-badge {
+        font-size: 14px;
+        padding: 40px 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>유저 관리 대시보드</h2>
+
+    <div class="user-list">
+      <div class="card">
+        <h3 class="user-name">홍길동 대리</h3>
+        <span class="role-badge admin">관리자</span>
+        <div class="'status-check">
+          <input type="checkbox" id="user1" />
+          <label for="user1">현재 작업 멤버로 선택</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="user-name">이영희 사원</h3>
+        <span class="role-badge member">일반 회원</span>
+        <div class="'status-check">
+          <input type="checkbox" id="user2" />
+          <label for="user2">현재 작업 멤버로 선택</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="user-name">김철수 사원</h3>
+        <span class="role-badge member">일반 회원</span>
+        <div class="'status-check">
+          <input type="checkbox" id="user3" />
+          <label for="user3">현재 작업 멤버로 선택</label>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

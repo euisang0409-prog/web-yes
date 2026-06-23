@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title>CloudOps Landing Page</title>
+    <style>
+      /* 기본 설정 */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: sans-serif;
+        color: #475569;
+        background-color: #fff;
+      }
+
+      /* GNB */
+      .gnb {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 10%;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .gnb__menu {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .gnb__link {
+        text-decoration: none;
+        color: #475569;
+      }
+      .gnb__link--active {
+        color: #3498db;
+        font-weight: bold;
+      }
+      .gnb__cta {
+        padding: 0.5rem 1rem;
+        border: 1px solid #3498db;
+        color: #3498db;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+
+      /* Hero */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5rem 2rem;
+        background: #fff;
+        text-align: center;
+        gap: 1.5rem;
+      }
+      .hero__title {
+        font-size: 2.5rem;
+        color: #0f172a;
+      }
+      .hero__btn-group {
+        display: flex;
+        gap: 1rem;
+      }
+      .hero__btn {
+        padding: 0.8rem 1.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+      }
+      .hero__btn--primary {
+        background: #3498db;
+        color: #fff;
+      }
+      .hero__btn--secondary {
+        background: #f1f5f9;
+        color: #475569;
+      }
+
+      /* Features */
+      .features {
+        padding: 5rem 10%;
+        background: #f8fafc;
+      }
+      .features__title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .features__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+      .features__item {
+        padding: 2rem;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+      }
+
+      /* Pricing */
+      .pricing {
+        padding: 5rem 10%;
+        background: #fff;
+      }
+      .pricing__title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .pricing__grid {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+      }
+      .pricing__card {
+        padding: 2rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        width: 350px;
+      }
+      .pricing__card--popular {
+        border: 2px solid #3498db;
+        transform: scale(1.05);
+      }
+      .pricing__list {
+        list-style: none;
+        margin: 1.5rem 0;
+      }
+      .pricing__action-btn {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #3498db;
+        background: transparent;
+        cursor: pointer;
+      }
+      .pricing__action-btn--highlight {
+        background: #3498db;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="gnb">
+      <div class="gnb__logo">CloudOps</div>
+      <ul class="gnb__menu">
+        <li><a href="#" class="gnb__link gnb__link--active">제품 기능</a></li>
+        <li><a href="#" class="gnb__link">사용법</a></li>
+        <li><a href="#" class="gnb__link">가격정책</a></li>
+        <li><a href="#" class="gnb__link">고객센터</a></li>
+      </ul>
+      <a href="#" class="gnb__cta">무료 시작하기</a>
+    </nav>
+
+    <header class="hero">
+      <h1 class="hero__title">
+        클라우드 인프라 관리를<br />더 안전하고 완벽하게
+      </h1>
+      <p class="hero__desc">
+        복잡한 설정 없이 몇 번의 클릭만으로 모니터링, 보안, 배포를 자동화하세요.
+        전 세계 1만 개 이상의 개발팀이 신뢰합니다.
+      </p>
+      <div class="hero__btn-group">
+        <button class="hero__btn hero__btn--primary">도입 문의하기</button>
+        <button class="hero__btn hero__btn--secondary">데모 보기</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="features">
+        <h2 class="features__title">비즈니스를 가속화하는 핵심 기능</h2>
+        <div class="features__grid">
+          <div class="features__item">
+            <div class="features__icon">⚡</div>
+            <h3 class="features__item-title">초고속 실시간 모니터링</h3>
+            <p class="features__item-desc">
+              트래픽 급증이나 서버 지연 현상을 1초 미만의 지연 시간 내로 완벽히
+              감지하여 관리자에게 즉시 전송합니다.
+            </p>
+          </div>
+          <div class="features__item">
+            <div class="features__icon">🛡️</div>
+            <h3 class="features__item-title">엔터프라이즈급 보안</h3>
+            <p class="features__item-desc">
+              모든 데이터 이동 경로는 종단간 암호화(E2EE) 처리되며, 다중 인증
+              표준 프로토콜을 기본 제공합니다.
+            </p>
+          </div>
+          <div class="features__item">
+            <div class="features__icon">📊</div>
+            <h3 class="features__item-title">인텔리전트 통계 리포트</h3>
+            <p class="features__item-desc">
+              AI 기반 분석 엔진이 지난 한 달간의 인프라 효율성을 평가하여 비용
+              절감 제안서를 자동 생성합니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="pricing">
+        <h2 class="pricing__title">합리적인 선택, 투명한 요금제</h2>
+        <div class="pricing__grid">
+          <div class="pricing__card">
+            <h3 class="pricing__card-title">스타트업 플랜</h3>
+            <p class="pricing__card-price">₩29,000</p>
+            <ul class="pricing__list">
+              <li>최대 5명의 팀원 초대</li>
+              <li>실시간 모니터링 대시보드</li>
+              <li>데이터 보존 기간 14일</li>
+            </ul>
+            <button class="pricing__action-btn">시작하기</button>
+          </div>
+          <div class="pricing__card pricing__card--popular">
+            <h3 class="pricing__card-title">프로페셔널 플랜</h3>
+            <p class="pricing__card-price">₩79,000</p>
+            <ul class="pricing__list">
+              <li>팀원 수 제한 없음</li>
+              <li>고급 보안 가이드라인 매칭</li>
+              <li>데이터 보존 기간 90일</li>
+              <li>24/7 우선 기술 지원</li>
+            </ul>
+            <button class="pricing__action-btn pricing__action-btn--highlight">
+              추천 플랜 선택
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

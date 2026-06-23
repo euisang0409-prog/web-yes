@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .card {
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 0cqmax;
+      }
+
+      .card.success {
+        border-color: #2ecc71;
+        background: #e8f8f5;
+        color: #1e824c;
+      }
+      .card.warning {
+        border-color: #f1c40f;
+        background: #fef9e7;
+        color: #d4ac0d;
+      }
+
+      .card.danger {
+        border: 1px solid #e74c3c;
+        background-color: #fdedec;
+      }
+
+      .card.card.danger.critical {
+        background-color: #c0392b;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>문제</h1>
+    <div class="card success">성공 메시지</div>
+    <div class="card danger critical">매우 심각한 오류 메시지</div>
+  </body>
+</html>
