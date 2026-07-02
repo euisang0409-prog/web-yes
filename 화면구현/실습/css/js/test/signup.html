@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: arial, sans-serif;
+        background-color: #f3f4f6;
+      }
+
+      .container {
+        width: 420px;
+        margin: 50px auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      h1 {
+        text-align: center;
+        color: #111827;
+      }
+
+      .id-box {
+        display: flex;
+        gap: 10px;
+      }
+
+      .id-box input {
+        flex: 1;
+        border-radius: 7px;
+        border: 1px solid #aaa;
+      }
+
+      .pw-box input {
+        width: 100%;
+        border-radius: 7px;
+        padding: 12px;
+        border: 1px solid #aaa;
+      }
+      #checkBtn {
+        width: 90px;
+        border-radius: 5px;
+        color: white;
+        background: #6b7280;
+        padding: 10px;
+      }
+
+      .email-box {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .email-box select {
+        width: 140px;
+      }
+
+      select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+
+      button {
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      #joinBtn {
+        width: 100%;
+        background-color: royalblue;
+        margin-top: 30px;
+        color: white;
+      }
+
+      .member-item {
+        background-color: #f9fafb;
+        border: 1px solid #ddd;
+        margin-top: 8px;
+        border-radius: 6px;
+        padding: 10px;
+      }
+
+      input,
+      select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+
+      #message {
+        margin-top: 10px;
+        text-align: center;
+        font-weight: bold;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>회원가입</h1>
+      <h3>아이디</h3>
+      <div class="id-box">
+        <input id="userId" type="text" placeholder="아이디 입력" />
+        <button id="checkBtn" onclick="check()">중복검사</button>
+      </div>
+
+      <h3>비밀번호</h3>
+      <div class="pw-box">
+        <input id="userPw" type="password" placeholder="비밀번호 입력" />
+      </div>
+
+      <h3>이메일</h3>
+      <div class="email-box">
+        <input id="emailId" type="text" placeholder="이메일 아이디" />
+        <span>@</span>
+
+        <select id="emailDomain">
+          <option value="gmail.com">gmail.com</option>
+          <option value="naver.com">naver.com</option>
+          <option value="daum.net">daum.net</option>
+          <option value="kakao.com">kakao.com</option>
+        </select>
+      </div>
+
+      <button id="joinBtn" onclick="join()">회원가입</button>
+
+      <p id="message"></p>
+      <h2>회원 목록</h2>
+    </div>
+
+    <div id="memberList"></div>
+    <script>
+      let members = [];
+
+      //   중복검사
+      function check() {
+        let id = document.getElementById("userId").value;
+
+        if (id === "") {
+          alert("아이디를 입력하세요.");
+          return;
+        }
+
+        for (let member of members) {
+          if (member.id == id) {
+            document.getElementById("message").innerText =
+              "이미 사용 중인 아이디 입니다.";
+            return;
+          }
+        }
+
+        document.getElementById("message").innerText =
+          "이미 사용 중인 아이디 입니다.";
+      }
+
+      function join() {
+        let id = document.getElementById("userId").value;
+        let pw = document.getElementById("userPw").value;
+        let emailId = document.getElementById("emailId").value;
+        let domain = document.getElementById("emailDomain").value;
+
+        let email = emailId + "@" + domain;
+
+        if (id == "" || pw == "" || emailId === "") {
+          alert("모든 항목을 입력하세요");
+          return;
+        }
+
+        for (let member of members) {
+          if (member.id == id) {
+            alert("이미 가입된 아이디입니다.");
+            return;
+          }
+        }
+
+        // 객체
+        let member = {
+          id: id,
+          pw: pw,
+          email: email,
+        };
+
+        // 배열에 저장
+        members.push(member);
+
+        // 완료 메시지
+        document.getElementById("message").innerText =
+          "회원가입이 완료되었습니다.";
+
+        showMember();
+
+        //   입력창 초기화
+        document.getElementById("userId").value = "";
+        document.getElementById("userPw").value = "";
+        document.getElementById("emailId").value = "";
+      }
+
+      function showMember() {
+        let list = document.getElementById("memberList");
+
+        list.innerHTML = "";
+
+        for (let member of members) {
+          list.innerHTML += `
+            <div class="member-item">
+                <strong>아이디</strong> : ${member.id}<br>
+                <strong>이메일</strong> : ${member.email}
+            </div>
+            `;
+        }
+      }
+    </script>
+  </body>
+</html>
