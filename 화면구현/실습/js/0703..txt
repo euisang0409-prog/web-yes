@@ -1,0 +1,9 @@
+1. 버튼을 클릭하면 강아지 사진을 가져오도록 한다
+2. 가져온 이미지를 `<img>` 태그에 출력한다
+3. 사진이 변경될 때마다 새로운 이미지가 표시되어야 한다
+4. 오류가 발생하면 콘솔에 에러 메시지를 출력하도록 한다
+
+요청주소 : https://dog.ceo/api/breeds/image/random
+
+요청을 하면 다음의 결과를 얻어올 수 있다.
+{"message":"https://images.dog.ceo/breeds/poodle-medium/PXL_20210220_100624962.jpg","status":"success"
