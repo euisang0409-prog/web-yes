@@ -1,0 +1,102 @@
+/* 전체 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+}
+
+/* 전체 컨테이너 */
+.container {
+  width: 450px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 제목 */
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* select */
+#citySelect {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+  font-size: 16px;
+}
+
+/* 버튼 */
+#weatherBtn {
+  width: 100%;
+  padding: 12px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #007bff;
+  color: white;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+#weatherBtn:hover {
+  background: #0056b3;
+}
+
+/* 오류 메시지 */
+#message {
+  margin-top: 15px;
+  text-align: center;
+  color: red;
+  font-weight: bold;
+}
+
+/* 결과 영역 */
+#weatherBox {
+  margin-top: 25px;
+}
+
+/* 카드 */
+.card {
+  padding: 20px;
+  border-radius: 10px;
+
+  background: #f8f9fa;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 카드 제목 */
+.card h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #007bff;
+}
+
+/* 카드 내용 */
+.card p {
+  margin: 10px 0;
+  font-size: 16px;
+}
