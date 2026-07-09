@@ -1,108 +1,145 @@
-//요소들 등록
-const githubId = document.getElementById("githubId");
+// 등록
+const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
+const allBtn = document.getElementById("allBtn");
 const message = document.getElementById("message");
-const profileBox = document.getElementById("profileBox");
+const count = document.getElementById("count");
+const productList = document.getElementById("productList");
 
-//아이디 검증 함수
-const validateGithubId = () => {
-  //아이디 값을 가져온다.
-  const value = githubId.value.trim();
+// 페이지 로드
+window.addEventListener("load", loadProducts);
 
-  let regex = /^[A-Za-z0-9-]+$/;
+// 유효성 검사
+const validateSearch = () => {
+  const value = searchInput.value.trim();
 
-  //비어있는지 검사
+  const regex = /^[a-zA-Z0-9\s]+$/;
+
   if (value === "") {
-    message.textContent = "GitHub 아이디를 입력하세요";
-    searchBtn.disabled = true;
+    message.textContent = "검색어를 입력하세요.";
+    message.className = "error";
     return false;
   }
 
-  //길이가 맞는지 검사
-  if (value.length < 3 || value.length > 20) {
-    message.textContent = "아이디는 3자 이상 20자 이하로 입력하세요";
-    searchBtn.disabled = true;
+  if (value.length < 2) {
+    message.textContent = "검색어는 2글자 이상 입력하세요.";
+    message.className = "error";
     return false;
   }
 
-  //정규식에 맞는지 검사
   if (!regex.test(value)) {
-    message.textContent = "아이디는 영어, 숫자, 하이픈만 입력할 수 있다.";
-    searchBtn.disabled = true;
+    message.textContent = "검색어에는 특수문자를 입력할 수 없습니다.";
+    message.className = "error";
     return false;
   }
 
-  //하이픈이 맨앞이나 맨뒤에 오는지 검사
-  if (value.startsWith("-") || value.endsWith("-")) {
-    message.textContent = "하이픈은 처음이나 끝에 사용할 수 없다.";
-    searchBtn.disabled = true;
-    return false;
-  }
-
-  //모든 조건을 충족할 때
   message.textContent = "";
-  searchBtn.disabled = false;
+  message.className = "";
+
   return true;
 };
 
-const searchGithubUser = async () => {
-  if (!validateGithubId()) {
+// 전체 상품 조회
+async function loadProducts() {
+  try {
+    message.textContent = "";
+    message.className = "";
+
+    const response = await fetch("https://dummyjson.com/products?limit=30");
+    const data = await response.json();
+
+    count.textContent = `전체 상품 : ${data.products.length}개`;
+
+    printProducts(data.products);
+  } catch (error) {
+    message.textContent = "상품 정보를 불러오지 못했습니다.";
+    message.className = "error";
+  }
+}
+
+// 상품 출력
+const printProducts = (products) => {
+  productList.innerHTML = "";
+
+  products.forEach((product) => {
+    let stockText = "";
+    let stockClass = "";
+
+    if (product.stock < 10) {
+      stockText = "재고 부족";
+      stockClass = "stock-low";
+    } else {
+      stockText = "재고 정상";
+      stockClass = "stock-normal";
+    }
+
+    productList.innerHTML += `
+      <div class="product-card">
+
+        <img src="${product.thumbnail}" alt="${product.title}">
+
+        <h3>${product.title}</h3>
+
+        <p>카테고리 : ${product.category}</p>
+
+        <p>가격 : $${product.price}</p>
+
+        <p>할인율 : ${product.discountPercentage}%</p>
+
+        <p>평점 : ${product.rating}</p>
+
+        <p class="${stockClass}">
+          재고 : ${product.stock}개 (${stockText})
+        </p>
+
+      </div>
+    `;
+  });
+};
+
+// 검색
+const searchProduct = async () => {
+  if (!validateSearch()) {
     return;
   }
 
-  const id = githubId.value.trim();
-  const url = `https://api.github.com/users/${id}`;
+  const keyword = searchInput.value.trim();
 
   try {
-    message.textContent = "사용자 정보를 불러오는 중입니다...";
-    profileBox.innerHTML = "";
+    const response = await fetch(
+      `https://dummyjson.com/products/search?q=${keyword}`,
+    );
 
-    const response = await fetch(url);
+    const data = await response.json();
 
-    if (response.status === 404) {
-      message.textContent = "존재하지 않는 사용자입니다.";
+    if (data.products.length === 0) {
+      message.textContent = "검색 결과가 없습니다.";
+      message.className = "info";
+
+      count.textContent = "";
+      productList.innerHTML = "";
+
       return;
     }
 
-    if (response.status === 403) {
-      message.textContent = "접근 권한이 없습니다.";
-      return;
-    }
+    message.textContent = "검색 완료";
+    message.className = "success";
 
-    if (!response.ok) {
-      throw new Error("API 오류");
-    }
+    count.textContent = `검색 결과 : ${data.products.length}`;
 
-    const user = await response.json();
-
-    message.textContent = "";
-
-    profileBox.innerHTML = `
-            <div class="profile-card">
-                <img src="${user.avatar_url}" alt="${user.login}">
-                <div class="profile-info">
-                    <h2>${user.login}</h2>
-                    <p><strong>이름:</strong> ${user.name || "이름 정보 없음"}</p>
-                    <p><strong>소개:</strong> ${user.bio || "소개 정보 없음"}</p>
-
-                    <div class="status">
-                        <div class="stat">팔로워 ${user.followers}</div>
-                        <div class="stat">팔로잉 ${user.following}</div>
-                        <div class="stat">저장소 ${user.public_repos}</div>
-                    </div>
-
-                    <a href="${user.html_url}">GitHub 페이지 이동</a>
-                </div>
-            </div>
-        `;
+    printProducts(data.products);
   } catch (error) {
-    message.textContent = "사용자 정보를 불러오지 못했습니다.";
+    message.textContent = "상품 정보를 불러오지 못했습니다.";
+    message.className = "error";
   }
 };
 
-githubId.addEventListener("input", validateGithubId);
+// 검색 버튼
+searchBtn.addEventListener("click", searchProduct);
 
-//버튼을 눌렀을 때 해야 하는일
-//1. 내용이 제대로 입력이 됐는지 확인
-//2. github api 서버에 정보를 요청을하고 응답을 받아와서 화면에 보여줘야한다.
-searchBtn.addEventListener("click", searchGithubUser);
+// 전체보기
+allBtn.addEventListener("click", () => {
+  searchInput.value = "";
+
+  loadProducts();
+});
