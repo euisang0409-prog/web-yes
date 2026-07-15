@@ -64,6 +64,7 @@ public class StudentDTO {
 
     public String getEmail() {
         return email;
+        
     }
 
 

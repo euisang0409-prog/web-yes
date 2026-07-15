@@ -9,6 +9,9 @@ public class WebMvcConfig implements WebMvcConfigurer{
    
    //WebMvcConfigurer : Spring MVC의 기본설정을 변경할 수 있는 인터페이스
 
+	
+	
+	
    //addCorsMappings() : 스프링부트가 시작될 때 이 메서드를 호출한다
    //registry : CORS 설정을 등록하는 객체
    @Override

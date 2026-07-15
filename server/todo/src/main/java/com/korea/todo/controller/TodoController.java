@@ -32,7 +32,7 @@ public class TodoController {
 	String str = todoService.testService();
 		List<String> list = new ArrayList<>();
 		list.add(str);
-		ResponseDTO<String> response = ResponseDTO.<String>builder();
+		ResponseDTO<String> response = ResponseDTO.<String>builder().data(list).bulid();
 		// ok() -> 상태를 강제로 200으로 설정한다.
 		// body() -> 응답본문에 response 객체를 넣는다.
 		// 완성된 HTTP응답을 클라이언트에게 전송한다.

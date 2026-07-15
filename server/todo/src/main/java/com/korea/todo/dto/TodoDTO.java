@@ -12,8 +12,10 @@ package com.korea.todo.dto;
 // 만약 서비스 실행 도중 유저 에러가 나면 에러 메시지를 어디에 포함할것인가
 // Entity에는 서비스 로직과 관련이 없기 때문에 다른 내용을 담기가 애매하다
 // 이런 경우 DTD에 에러 메시지 필드를 선언하고 DTO에 메시지를 넣어서 전달하면 된다.
+
+
 public class TodoDTO {
-	private String id;
+	private Long id;
 	private String title;
 	private boolean done;
 	
