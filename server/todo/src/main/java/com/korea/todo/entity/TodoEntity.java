@@ -27,4 +27,14 @@ public class TodoEntity {
 	private String userId; //이 객체를 생성한 유저의 아이디
 	private String title; //할 일
 	private boolean done; //완료 여부
+	
+	// DTO타입을 Entity타입으로 바꾸는 toEntity메서드 작성하기
+	// static으로 만들기
+	public static TodoEntity toEntity(TodoEntity dto){
+		return TodoEntity.builder()
+				.id(dto.getId())
+				.title(dto.getTitle())
+				.done(dto.isDone())
+				.build();
+	}
 }

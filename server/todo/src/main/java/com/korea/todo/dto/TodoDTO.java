@@ -36,6 +36,11 @@ public class TodoDTO {
 		this.title = entity.getTitle();
 		this.done = entity.isDone();
 	}
+
+	public static TodoEntity toEntity(TodoDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

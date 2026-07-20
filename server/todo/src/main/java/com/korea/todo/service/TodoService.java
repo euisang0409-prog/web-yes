@@ -1,11 +1,14 @@
 package com.korea.todo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.korea.todo.entity.TodoEntity;
 import com.korea.todo.repository.TodoRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 //비즈니스 계층
 //표현계층과 영속계층 사이에서 비즈니스 로직을 수행하는 역할을 한다.
@@ -15,13 +18,15 @@ import lombok.RequiredArgsConstructor;
 
 @Service //스프링 bean으로 등록되어 다른 클래스에 주입될 수 있다.
 @RequiredArgsConstructor
+@Slf4j // 롬복에서 온 로그를 사용할 수 있게 해주는 어노테이션
+// trace : 가장 상세한 실행 정보
+// debug : 개발 및 디버깅 정보
+// info : 일반적인 실행 정보
+// warn : 경고 상황
+// error : 오류 상황
 public class TodoService {
 	
 	private final TodoRepository repository;
-	
-	
-	
-	
 
 	public String testService() {
 		
@@ -52,5 +57,39 @@ public class TodoService {
 		//조회하려는 ID가 존재하지 않을 수 있기 때문이다.
 		
 		return savedEntity.getTitle();
+	}
+	
+	// 할일 추가
+	// 1. 넘어온 엔티티가 유효한지 검사
+	// 2. 엔티티를 데이터베이스에 저장 -> 로그를 남긴다.
+	// 3. findByUserId()를 통해 저장된 엔티티를 포함하는 새 리스트를 반환
+	
+	public List<TodoEntity> create(TodoEntity entity){
+		validate(entity);
+		
+		// 전달된 entity를 데이터베이스에 저장한다.
+		repository.save(entity);
+		log.info("Entity Id : {} is saved", entity.getId());
+		
+		return repository.findByUserId(entity.getUserId());
+	}
+	
+	// 전체조회
+	// retrieve메서드 만들기
+	public 
+	
+	
+	private void validate(TodoEntity entity) {
+		// null인지 확인
+		if(entity == null) {
+			log.warn("Entity cannot be null");
+			throw new RuntimeException("Entity cannot be null");
+		}
+		
+		// entity의 userId값이 들어있는지 확인
+		if(entity.getUserId() == null) {
+			log.warn("Unknown user");
+			throw new RuntimeException("Unknown user");
+		}
 	}
 }
