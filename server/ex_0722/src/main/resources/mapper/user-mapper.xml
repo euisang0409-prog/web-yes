@@ -7,45 +7,10 @@
 <!--
     namespace : DAO 인터페이스의 전체 경로와 반드시 동일해야 한다.
 -->
-<mapper namespace="com.korea.ex_0722.dao.UserDAO">
-
-    <!-- 전체 조회 -->
-    <select id="findAll"
-            resultType="com.korea.ex_0722.vo.UserVO">
-
-        SELECT id, name, email
-        FROM users
-
-    </select>
-
-    <!-- id로 회원 조회 -->
-    <select id="findById"
-            parameterType="long"
-            resultType="com.korea.ex_0722.vo.UserVO">
-
-        SELECT id, name, email
-        FROM users
-        WHERE id = #{id}
-
-    </select>
-
-	<!-- 추가하기  -->
-	<insert id="insert">
-		INSERT INTO users(name,email) VALUES(#{name},#{email})
-	</insert>
-
-	<update id="update">
-		update users 
-		set
-			name = #{name},
-			email = #{email}
-		where id=#{id}
-	</update>
-
-
-	<delete id="delete">
-		delete from users
-		where id = #{id}
-	</delete>
+<mapper namespace="com.korea.ex_0722.dao.ReservationDAO">
+	
+	
+	
+     
 	
 </mapper>
