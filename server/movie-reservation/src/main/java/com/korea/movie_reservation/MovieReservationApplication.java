@@ -1,13 +1,13 @@
-package com.korea.ex_0722;
+package com.korea.movie_reservation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Ex0722Application {
+public class MovieReservationApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Ex0722Application.class, args);
+		SpringApplication.run(MovieReservationApplication.class, args);
 	}
 
 }
