@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>무한 던전 - 방치형 RPG</title>
+
+<style>
+body{
+    background:#111;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.box{
+    width:700px;
+    margin:30px auto;
+    background:#222;
+    padding:20px;
+    border-radius:20px;
+}
+
+button{
+    padding:12px 25px;
+    margin:5px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.status{
+    background:#000;
+    padding:15px;
+    border-radius:10px;
+}
+
+.log{
+    height:250px;
+    overflow:auto;
+    background:#050505;
+    text-align:left;
+    padding:10px;
+    margin-top:20px;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="box">
+
+<h1>⚔ 무한 던전 RPG ⚔</h1>
+
+
+<div id="select">
+
+<h2>직업 선택</h2>
+
+<button onclick="startGame('검사')">
+⚔ 검사
+</button>
+
+<button onclick="startGame('마법사')">
+🔮 마법사
+</button>
+
+</div>
+
+
+
+<div id="game" style="display:none">
+
+
+<h2 id="className"></h2>
+
+
+<div class="status" id="status"></div>
+
+
+<h2 id="enemy"></h2>
+
+
+<div id="battle">
+자동 사냥 중...
+</div>
+
+
+<div class="log" id="log"></div>
+
+
+<button onclick="saveGame()">
+💾 저장
+</button>
+
+<button onclick="resetGame()">
+초기화
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+
+let player=null;
+let monster=null;
+
+
+let monsters=[];
+
+
+// 몬스터 100종 생성
+
+let monsterNames=[
+"슬라임",
+"고블린",
+"늑대",
+"오크",
+"해골병사",
+"리자드맨",
+"트롤",
+"골렘",
+"와이번",
+"데스나이트",
+"드래곤"
+];
+
+
+for(let i=1;i<=100;i++){
+
+    monsters.push({
+
+        name:
+        monsterNames[i%monsterNames.length]
+        +" Lv."+i,
+
+        hp:
+        100+i*150,
+
+        atk:
+        5+i*5,
+
+        exp:
+        50+i*30,
+
+        gold:
+        20+i*10
+
+    });
+
+}
+
+
+
+
+function startGame(job){
+
+
+player={
+
+job:job,
+
+level:1,
+
+exp:0,
+
+gold:0,
+
+hp:0,
+
+maxHp:0,
+
+atk:0,
+
+class:""
+
+};
+
+
+
+if(job=="검사"){
+
+
+player.maxHp=500;
+
+player.atk=50;
+
+player.class="검사";
+
+
+}else{
+
+
+player.maxHp=250;
+
+player.atk=100;
+
+player.class="마법사";
+
+
+}
+
+
+player.hp=player.maxHp;
+
+
+document.getElementById("select").style.display="none";
+
+document.getElementById("game").style.display="block";
+
+
+log("✨ "+job+" 시작!");
+
+
+spawnMonster();
+
+
+update();
+
+
+startAuto();
+
+
+}
+
+
+
+
+function spawnMonster(){
+
+
+let data=
+monsters[Math.floor(Math.random()*monsters.length)];
+
+
+monster={
+
+name:data.name,
+
+hp:data.hp,
+
+max:data.hp,
+
+atk:data.atk,
+
+exp:data.exp,
+
+gold:data.gold
+
+};
+
+
+}
+
+
+
+
+// 자동 전투
+
+function startAuto(){
+
+
+setInterval(()=>{
+
+
+if(!player)return;
+
+
+monster.hp-=player.atk;
+
+
+
+log(
+"⚔ "+monster.name+
+"에게 "+
+player.atk+
+" 피해"
+);
+
+
+
+if(monster.hp<=0){
+
+
+log(
+"👹 "+monster.name+
+" 처치!"
+);
+
+
+player.exp+=monster.exp;
+
+player.gold+=monster.gold;
+
+
+levelCheck();
+
+
+spawnMonster();
+
+
+}
+
+
+update();
+
+
+
+},1000);
+
+
+}
+
+
+
+
+
+
+function levelCheck(){
+
+
+let need=
+player.level*200;
+
+
+
+if(player.exp>=need){
+
+
+player.level++;
+
+player.exp=0;
+
+
+player.maxHp+=100;
+
+player.atk+=20;
+
+player.hp=player.maxHp;
+
+
+log(
+"🔥 LEVEL UP! Lv."
++player.level
+);
+
+
+
+checkPromotion();
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+function checkPromotion(){
+
+
+if(player.level==10){
+
+
+if(player.job=="검사"){
+
+player.class="기사";
+
+}
+else{
+
+player.class="원소술사";
+
+}
+
+
+log(
+"🎉 1차 전직 완료 : "
++player.class
+);
+
+
+}
+
+
+
+if(player.level==30){
+
+
+if(player.job=="검사"){
+
+player.class="성기사";
+
+}
+else{
+
+player.class="대마법사";
+
+}
+
+
+log(
+"🎉 2차 전직 완료 : "
++player.class
+);
+
+
+
+}
+
+
+
+if(player.level==50){
+
+
+if(player.job=="검사"){
+
+player.class="검성";
+
+}
+else{
+
+player.class="마도왕";
+
+}
+
+
+log(
+"👑 최종 전직 : "
++player.class
+);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+function update(){
+
+
+if(!player)return;
+
+
+document.getElementById("className").innerHTML=
+player.class;
+
+
+
+document.getElementById("status").innerHTML=
+
+`
+Lv : ${player.level}<br>
+HP : ${player.hp}/${player.maxHp}<br>
+공격력 : ${player.atk}<br>
+EXP : ${player.exp}<br>
+💰 골드 : ${player.gold}
+`;
+
+
+
+document.getElementById("enemy").innerHTML=
+
+`
+👹 ${monster.name}<br>
+HP : ${monster.hp}/${monster.max}
+`;
+
+
+
+}
+
+
+
+
+
+
+function log(text){
+
+let box=
+document.getElementById("log");
+
+
+box.innerHTML+=
+text+"<br>";
+
+
+box.scrollTop=
+box.scrollHeight;
+
+
+}
+////////////////////////////////////////////////////
+// 저장 시스템
+////////////////////////////////////////////////////
+
+
+let equipment={
+
+weapon:"낡은 검",
+
+power:0
+
+};
+
+
+let dungeon=1;
+
+
+
+function saveGame(){
+
+
+let save={
+
+player:player,
+
+equipment:equipment,
+
+dungeon:dungeon,
+
+time:Date.now()
+
+};
+
+
+localStorage.setItem(
+"idleRPG",
+JSON.stringify(save)
+);
+
+
+log("💾 저장 완료!");
+
+}
+
+
+
+function loadGame(){
+
+
+let data=
+localStorage.getItem("idleRPG");
+
+
+if(!data){
+
+return false;
+
+}
+
+
+let save=
+JSON.parse(data);
+
+
+player=save.player;
+
+equipment=save.equipment;
+
+dungeon=save.dungeon;
+
+
+
+// 오프라인 보상 계산
+
+let offline=
+Math.floor(
+(Date.now()-save.time)/1000
+);
+
+
+
+if(offline>0){
+
+
+let reward=
+offline*player.level*5;
+
+
+player.exp+=reward;
+
+
+player.gold+=reward;
+
+
+log(
+"🌙 오프라인 보상!"
+);
+
+log(
+"EXP +"+reward
+);
+
+
+}
+
+
+document.getElementById("select").style.display="none";
+
+document.getElementById("game").style.display="block";
+
+
+spawnMonster();
+
+update();
+
+
+startAuto();
+
+
+return true;
+
+
+}
+
+
+
+
+
+
+////////////////////////////////////////////////////
+// 아이템 시스템
+////////////////////////////////////////////////////
+
+
+let items=[
+
+"낡은 검",
+
+"강철 검",
+
+"불꽃 검",
+
+"용사의 검",
+
+"전설의 검"
+
+];
+
+
+
+function dropItem(){
+
+
+let chance=
+Math.random();
+
+
+if(chance<0.2){
+
+
+let item=
+items[
+Math.floor(
+Math.random()*items.length
+)
+];
+
+
+equipment.weapon=item;
+
+
+equipment.power+=50;
+
+
+log(
+"🎁 아이템 획득 : "
++item
+);
+
+
+}
+
+}
+
+
+
+
+////////////////////////////////////////////////////
+// 장비 강화
+////////////////////////////////////////////////////
+
+
+function upgradeWeapon(){
+
+
+let cost=
+equipment.power+100;
+
+
+if(player.gold>=cost){
+
+
+player.gold-=cost;
+
+
+equipment.power+=50;
+
+
+player.atk+=50;
+
+
+log(
+"⚔ 장비 강화 성공!"
+);
+
+
+}else{
+
+
+log(
+"💰 골드 부족"
+);
+
+
+}
+
+
+update();
+
+
+}
+
+
+
+
+
+
+////////////////////////////////////////////////////
+// 던전 시스템
+////////////////////////////////////////////////////
+
+
+
+function nextDungeon(){
+
+
+if(player.level>=dungeon*10){
+
+
+dungeon++;
+
+
+log(
+"🏰 던전 "+dungeon+
+"층 진입!"
+);
+
+
+}else{
+
+
+log(
+"레벨이 부족합니다."
+);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+////////////////////////////////////////////////////
+// 보스 시스템
+////////////////////////////////////////////////////
+
+
+
+function spawnBoss(){
+
+
+monster={
+
+
+name:
+"🐉 던전 "+dungeon+
+"층 보스",
+
+
+hp:
+5000*dungeon,
+
+
+max:
+5000*dungeon,
+
+
+atk:
+200*dungeon,
+
+
+exp:
+1000*dungeon,
+
+
+gold:
+500*dungeon
+
+
+
+};
+
+
+log(
+"🔥 보스 등장!"
+);
+
+
+update();
+
+
+}
+
+
+
+
+
+
+////////////////////////////////////////////////////
+// 기존 전투 보상 확장
+////////////////////////////////////////////////////
+
+
+// 기존 levelCheck 아래에 추가
+
+/*
+if(monster.name.includes("보스")){
+    dropItem();
+}
+*/
+
+
+
+
+
+
+////////////////////////////////////////////////////
+// 자동 저장
+////////////////////////////////////////////////////
+
+
+setInterval(()=>{
+
+
+if(player){
+
+saveGame();
+
+}
+
+
+},30000);
+
+
+
+
+
+////////////////////////////////////////////////////
+// 시작 시 저장 데이터 확인
+////////////////////////////////////////////////////
+
+
+window.onload=function(){
+
+
+if(localStorage.getItem("idleRPG")){
+
+
+let answer=
+confirm(
+"저장된 모험이 있습니다. 이어하시겠습니까?"
+);
+
+
+if(answer){
+
+loadGame();
+
+}
+
+
+}
+
+
+}

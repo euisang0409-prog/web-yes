@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>모바일 방치형 RPG</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+      }
+
+      body {
+        background-color: #0b0c10;
+        color: #ffffff;
+        font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      /* 스마트폰 기기 프레임 연출 */
+      #mobile-frame {
+        width: 380px;
+        height: 760px;
+        background-color: #12131c;
+        border: 12px solid #222533;
+        border-radius: 40px;
+        box-shadow:
+          0 0 50px rgba(0, 0, 0, 0.9),
+          0 0 15px rgba(255, 177, 66, 0.2);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      /* 상단 노치/스피커 바 */
+      .notch {
+        width: 130px;
+        height: 18px;
+        background-color: #222533;
+        margin: 0 auto;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        z-index: 100;
+      }
+
+      /* 상단 스테이지 & 재화 바 */
+      #top-bar {
+        padding: 10px 15px;
+        background: linear-gradient(
+          180deg,
+          rgba(18, 19, 28, 0.9) 0%,
+          rgba(18, 19, 28, 0.6) 100%
+        );
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+      }
+      .stage-badge {
+        background: linear-gradient(135deg, #ff9f43, #ee5253);
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: bold;
+        box-shadow: 0 0 8px rgba(238, 82, 83, 0.5);
+      }
+      .currency {
+        font-size: 13px;
+        font-weight: bold;
+        color: #feca57;
+      }
+
+      /* 중앙 전투 캔버스 */
+      #canvas-container {
+        position: relative;
+        width: 100%;
+        height: 380px;
+        background: #050608;
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      /* 하단 캐릭터 스테이터스 및 컨트롤 UI */
+      #bottom-ui {
+        flex: 1;
+        background-color: #1a1c29;
+        border-top: 2px solid #2d3248;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .hero-profile {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background-color: #12131c;
+        padding: 10px;
+        border-radius: 12px;
+        border: 1px solid #2d3248;
+      }
+      .avatar-box {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #2e86de, #54a0ff);
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        border: 2px solid #48dbfb;
+        box-shadow: 0 0 10px rgba(72, 219, 251, 0.4);
+      }
+      .hero-info {
+        flex: 1;
+      }
+      .hero-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #feca57;
+      }
+      .hero-stats {
+        font-size: 11px;
+        color: #c8d6e5;
+        margin-top: 2px;
+      }
+
+      /* 게이지 바 */
+      .gauge-bg {
+        background-color: #0c0d14;
+        height: 8px;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: 5px;
+      }
+      .gauge-fill {
+        height: 100%;
+        width: 0%;
+        transition: width 0.1s;
+      }
+      #exp-bar {
+        background: linear-gradient(90deg, #ff9f43, #feca57);
+      }
+
+      /* 스킬 버튼 패널 */
+      .skill-panel {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .skill-btn {
+        flex: 1;
+        background: linear-gradient(180deg, #2e3248 0%, #1e2130 100%);
+        border: 1px solid #48dbfb;
+        border-radius: 8px;
+        padding: 8px 0;
+        color: #fff;
+        font-size: 11px;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      }
+      .skill-btn:active {
+        transform: scale(0.96);
+      }
+
+      /* 하단 탭 메뉴 (모바일 게임 하단 바) */
+      .tab-bar {
+        display: flex;
+        justify-content: space-around;
+        background-color: #12131c;
+        padding: 8px 0;
+        border-radius: 10px;
+        margin-top: 5px;
+      }
+      .tab-item {
+        font-size: 11px;
+        color: #8395a7;
+        text-align: center;
+        cursor: pointer;
+      }
+      .tab-item.active {
+        color: #feca57;
+        font-weight: bold;
+      }
+
+      /* 직업 선택 레이어 */
+      #job-select-modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(11, 12, 16, 0.95);
+        z-index: 200;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+      .job-card {
+        width: 100%;
+        background: linear-gradient(135deg, #1e2130, #12131c);
+        border: 2px solid #ff9f43;
+        border-radius: 15px;
+        padding: 15px;
+        margin: 10px 0;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .job-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 15px rgba(255, 159, 67, 0.4);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mobile-frame">
+      <div class="notch"></div>
+
+      <!-- 시작 시 직업 선택 모달 -->
+      <div id="job-select-modal">
+        <h2 style="color: #feca57; margin-bottom: 20px">직업을 선택하세요</h2>
+        <div class="job-card" onclick="selectJob('검사')">
+          <div style="font-size: 35px">⚔️</div>
+          <h3 style="color: #fff; margin: 5px 0">검사 (Warrior)</h3>
+          <p style="font-size: 12px; color: #8395a7">
+            화려한 연속 베기와 검기 스킬 사용
+          </p>
+        </div>
+        <div
+          class="job-card"
+          style="border-color: #54a0ff"
+          onclick="selectJob('마법사')"
+        >
+          <div style="font-size: 35px">🔮</div>
+          <h3 style="color: #fff; margin: 5px 0">마법사 (Mage)</h3>
+          <p style="font-size: 12px; color: #8395a7">
+            화염구 및 대규모 메테오 마법 폭격
+          </p>
+        </div>
+      </div>
+
+      <!-- 상단 상태 바 -->
+      <div id="top-bar">
+        <div class="stage-badge">STAGE <span id="txt-stage">1</span> / 100</div>
+        <div class="currency">💰 <span id="txt-gold">0</span></div>
+      </div>
+
+      <!-- 전투 필드 (캔버스) -->
+      <div id="canvas-container">
+        <canvas id="gameCanvas" width="356" height="380"></canvas>
+      </div>
+
+      <!-- 하단 모바일 컨트롤 패널 -->
+      <div id="bottom-ui">
+        <!-- 영웅 요약 프로필 -->
+        <div class="hero-profile">
+          <div class="avatar-box" id="hero-avatar">⚔️</div>
+          <div class="hero-info">
+            <div
+              style="
+                display: flex;
+                justify-shadow: space-between;
+                align-items: center;
+              "
+            >
+              <span class="hero-title" id="txt-job">검사</span>
+              <span style="font-size: 11px; color: #ff9f43; font-weight: bold"
+                >Lv.<span id="txt-lvl">1</span></span
+              >
+            </div>
+            <div class="hero-stats">공격력: <span id="txt-pow">12</span></div>
+            <div class="gauge-bg">
+              <div id="exp-bar" class="gauge-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 액티브 스킬 버튼 -->
+        <div class="skill-panel">
+          <div class="skill-btn" onclick="useSkill()">⚡ 필살기 사용</div>
+          <div
+            class="skill-btn"
+            style="border-color: #ff9f43"
+            onclick="autoBattleToggle()"
+          >
+            🤖 AUTO: ON
+          </div>
+        </div>
+
+        <!-- 하단 모바일 탭 메뉴 -->
+        <div class="tab-bar">
+          <div class="tab-item active">⚔️ 전투</div>
+          <div class="tab-item">👤 영웅</div>
+          <div class="tab-item">🎒 가방</div>
+          <div class="tab-item">💎 상점</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+
+      // 게임 상태 변수
+      let player = {
+        baseJob: "",
+        title: "",
+        level: 1,
+        power: 12,
+        exp: 0,
+        maxExp: 20,
+        x: 80,
+        y: 260,
+        attackTimer: 0,
+        gold: 0,
+      };
+
+      let monster = {
+        name: "고블린",
+        stage: 1,
+        hp: 40,
+        maxHp: 40,
+        x: 360,
+        targetX: 240,
+        color: "#2ecc71",
+        isAlive: true,
+      };
+
+      let particles = [];
+      let screenShake = 0;
+
+      const jobTree = {
+        검사: { 1: "검사", 5: "기사 🛡️", 10: "소드마스터 🗡️" },
+        마법사: { 1: "마법사", 5: "대마법사 🧙‍♂️", 10: "아크메이지 🌌" },
+      };
+
+      function selectJob(jobChoice) {
+        player.baseJob = jobChoice;
+        player.title = jobTree[jobChoice][1];
+        player.power = jobChoice === "검사" ? 14 : 11;
+
+        document.getElementById("job-select-modal").style.display = "none";
+        document.getElementById("hero-avatar").innerText =
+          jobChoice === "검사" ? "⚔️" : "🔮";
+
+        spawnMonster();
+        requestAnimationFrame(loop);
+      }
+
+      function spawnMonster() {
+        if (monster.stage > 100) return;
+
+        const mList = [
+          { name: "슬라임", color: "#2ecc71", hp: 30 },
+          { name: "고블린", color: "#e67e22", hp: 55 },
+          { name: "스켈레톤", color: "#ecf0f1", hp: 90 },
+          { name: "오크 캡틴", color: "#e74c3c", hp: 140 },
+          { name: "데몬 킹", color: "#9b59b6", hp: 220 },
+        ];
+
+        let idx = Math.min(
+          Math.floor((monster.stage - 1) / 20),
+          mList.length - 1,
+        );
+        let m = mList[idx];
+
+        monster.name = m.name;
+        monster.color = m.color;
+        monster.maxHp = m.hp + monster.stage * 3;
+        monster.hp = monster.maxHp;
+        monster.x = 360; // 우측 생성 후 걸어옴
+        monster.isAlive = true;
+      }
+
+      function loop() {
+        update();
+        render();
+        requestAnimationFrame(loop);
+      }
+
+      function update() {
+        if (monster.stage > 100) return;
+
+        // 몬스터 이동
+        if (monster.isAlive && monster.x > monster.targetX) {
+          monster.x -= 2;
+        } else if (monster.isAlive) {
+          // 자동 공격
+          player.attackTimer++;
+          if (player.attackTimer >= 30) {
+            player.attackTimer = 0;
+            attack();
+          }
+        }
+
+        // 파티클 업데이트
+        for (let i = particles.length - 1; i >= 0; i--) {
+          let p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life--;
+          if (p.life <= 0) particles.splice(i, 1);
+        }
+
+        if (screenShake > 0) screenShake--;
+        updateUI();
+      }
+
+      function attack() {
+        let dmg = player.power + Math.floor(Math.random() * 5);
+        monster.hp -= dmg;
+
+        // 타격 파티클 연출
+        for (let i = 0; i < 5; i++) {
+          particles.push({
+            x: monster.x,
+            y: monster.y - 15,
+            vx: (Math.random() - 0.5) * 6,
+            vy: (Math.random() - 0.5) * 6,
+            color: player.baseJob === "검사" ? "#f1c40f" : "#e74c3c",
+            life: 15,
+          });
+        }
+
+        // 데미지 텍스트
+        particles.push({
+          type: "text",
+          text: `-${dmg}`,
+          x: monster.x,
+          y: monster.y - 35,
+          vx: 0,
+          vy: -1,
+          color: "#ff3838",
+          life: 25,
+        });
+
+        if (monster.hp <= 0) {
+          monster.hp = 0;
+          monster.isAlive = false;
+          monster.stage++;
+          player.gold += 10 + monster.stage * 2;
+          player.exp += 10;
+
+          // 레벨업 판정
+          if (player.exp >= player.maxExp) {
+            player.level++;
+            player.exp -= player.maxExp;
+            player.maxExp = Math.floor(player.maxExp * 1.4);
+            player.power += 4;
+
+            let nextTitle = jobTree[player.baseJob][player.level];
+            if (nextTitle) player.title = nextTitle;
+          }
+
+          setTimeout(spawnMonster, 300);
+        }
+      }
+
+      function useSkill() {
+        if (!monster.isAlive) return;
+        screenShake = 12;
+        let dmg = player.power * 2;
+        monster.hp -= dmg;
+
+        particles.push({
+          type: "text",
+          text: `CRITICAL! -${dmg}`,
+          x: monster.x - 20,
+          y: monster.y - 50,
+          vx: 0,
+          vy: -1.5,
+          color: "#feca57",
+          life: 35,
+        });
+
+        if (monster.hp <= 0) monster.hp = 0;
+      }
+
+      function autoBattleToggle() {
+        // 방치형 자동 진행 모드
+      }
+
+      function render() {
+        ctx.save();
+        if (screenShake > 0) {
+          ctx.translate((Math.random() - 0.5) * 6, (Math.random() - 0.5) * 6);
+        }
+
+        // 1. 배경 그라데이션
+        let bgGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        bgGrad.addColorStop(0, "#0c1017");
+        bgGrad.addColorStop(1, "#1a2233");
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // 바닥선
+        ctx.fillStyle = "#2d3748";
+        ctx.fillRect(0, 280, canvas.width, 100);
+
+        // 2. 영웅 캐릭터 그리기 (글로우 이펙트 포함)
+        ctx.save();
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = player.baseJob === "검사" ? "#54a0ff" : "#9b59b6";
+        ctx.fillStyle = player.baseJob === "검사" ? "#2e86de" : "#8e44ad";
+        ctx.fillRect(player.x, player.y - 40, 28, 40); // 몸통
+        ctx.fillStyle = "#feca57";
+        ctx.fillRect(player.x + 4, player.y - 52, 20, 12); // 머리/모자
+        ctx.restore();
+
+        // 3. 몬스터 그리기
+        if (monster.isAlive) {
+          ctx.save();
+          ctx.fillStyle = monster.color;
+          ctx.beginPath();
+          ctx.arc(monster.x, monster.y - 20, 20, 0, Math.PI * 2);
+          ctx.fill();
+
+          // 체력바
+          ctx.fillStyle = "#000";
+          ctx.fillRect(monster.x - 20, monster.y - 50, 40, 6);
+          ctx.fillStyle = "#ff5252";
+          ctx.fillRect(
+            monster.x - 20,
+            monster.y - 50,
+            (monster.hp / monster.maxHp) * 40,
+            6,
+          );
+          ctx.restore();
+        }
+
+        // 4. 파티클 및 데미지 텍스트 렌더링
+        particles.forEach((p) => {
+          ctx.save();
+          if (p.type === "text") {
+            ctx.font = "bold 15px sans-serif";
+            ctx.fillStyle = p.color;
+            ctx.fillText(p.text, p.x, p.y);
+          } else {
+            ctx.fillStyle = p.color;
+            ctx.fillRect(p.x, p.y, 4, 4);
+          }
+          ctx.restore();
+        });
+
+        ctx.restore();
+      }
+
+      function updateUI() {
+        document.getElementById("txt-stage").innerText = monster.stage;
+        document.getElementById("txt-gold").innerText = player.gold;
+        document.getElementById("txt-job").innerText = player.title;
+        document.getElementById("txt-lvl").innerText = player.level;
+        document.getElementById("txt-pow").innerText = player.power;
+
+        let expPct = (player.exp / player.maxExp) * 100;
+        document.getElementById("exp-bar").style.width = `${expPct}%`;
+      }
+    </script>
+  </body>
+</html>
